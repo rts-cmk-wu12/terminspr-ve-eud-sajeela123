@@ -1,0 +1,27 @@
+.container {
+  background-color: #5E2E53;
+  color: white;
+  width: 411px;
+  height: 823px;
+  margin: 0 auto;
+  padding-bottom: 60px;
+  overflow-y: auto;
+  font-family: sans-serif;
+}
+
+.header {
+  padding: 20px;
+  font-size: 24px;
+  position: sticky;
+  top: 0;
+  background-color: #5E2E53;
+  z-index: 10;
+}
+
+.scrollArea {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
