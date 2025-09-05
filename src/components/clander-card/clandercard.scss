@@ -1,0 +1,29 @@
+.card {
+  background-color: white;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start; 
+  height: 9em;
+  margin-top: 2em;
+  padding-left: 1em;
+  border-radius: 0.5rem;
+  text-decoration: none; 
+  color: black;
+}
+
+.card-title {
+  color: black;
+  font-weight: 600;
+  font-size: 2.5em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.card-subtitle {
+  font-weight: 600;
+  font-size: 1.25rem; 
+}

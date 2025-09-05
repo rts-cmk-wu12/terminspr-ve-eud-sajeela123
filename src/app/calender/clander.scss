@@ -1,0 +1,16 @@
+.login-role {
+  color: white;
+  font-weight: 600; /* font-semibold */
+  font-size: 2.5em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.kalender-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

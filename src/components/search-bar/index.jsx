@@ -3,6 +3,7 @@
 import {useState} from "react";
 import {redirect} from "next/navigation";
 import {FiSearch} from "react-icons/fi";
+import "./search-bar.scss";
 
 export default function SearchBar(){
     const [searchTerm, setSearchedTerm] = useState("");
@@ -17,8 +18,8 @@ export default function SearchBar(){
 
 
 return(
-<div className="navbar">
-    <form onSubmit={onSubmit} className="search-form">
+<div className="page-search">
+    <form onSubmit={handleSearch} className="search-form">
 
 <input
 name="search"

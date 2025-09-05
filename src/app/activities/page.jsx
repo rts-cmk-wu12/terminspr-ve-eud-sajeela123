@@ -1,6 +1,6 @@
 "use client";
 import "./activity.scss";
- 
+ import Footer from "@/components/ui/footer";
 import { fetchActivities } from "@/action/activities";
 import { useEffect,useState } from "react";
 import ActivityCard from "@/components/activity-card";
@@ -34,7 +34,7 @@ export default function ActivitiesPage({}) {
  
                 }
             </div>
- 
+ <Footer/>
            
             
         </div>
