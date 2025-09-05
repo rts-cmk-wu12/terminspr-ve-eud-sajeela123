@@ -1,0 +1,18 @@
+.activity-overview {
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.user-list {
+  padding: 1.25rem; 
+  margin-top: 10rem;
+  list-style: none;
+}
+
+.user-list-item {
+  color: white;
+  font-size: 1.125rem; 
+  font-weight: 600; 
+  margin-top: 1.25rem;
+}
