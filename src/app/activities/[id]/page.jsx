@@ -1,6 +1,7 @@
 "use client";
 
 import { useParams, useRouter } from "next/navigation";
+//useParams() gives route parameters (like id from a dynamic route /activities/[id]).
 import { useEffect, useState } from "react";
 import { getActivityById, joinActivity, leaveActivity } from "@/action/details";
 import Footer from "@/components/ui/footer";
@@ -10,18 +11,19 @@ export default function ActivityDetailPage() {
   const { id } = useParams();
   const router = useRouter();
 
-  const [activity, setActivity] = useState(null);
-  const [user, setUser] = useState(null);
-  const [joined, setJoined] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [activity, setActivity] = useState(null); //activity — holds the fetched activity object (null initially).
+  const [user, setUser] = useState(null); //user — holds the current user info (null until restored from token).
+  const [joined, setJoined] = useState(false);//joined — boolean: whether the current user has joined the activity.
+  const [loading, setLoading] = useState(true);//loading — boolean to show loading indicator while data is fetched (starts true).
 
   // Restore user from JWT token
+  //useEffect — side effects (fetching, reading localStorage).
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
       try {
         const payload = JSON.parse(atob(token.split(".")[1]));
-        setUser(payload.data); // your API includes user info in `data`
+        setUser(payload.data); //  API includes user info in `data`
       } catch (err) {
         console.error("Invalid token", err);
       }

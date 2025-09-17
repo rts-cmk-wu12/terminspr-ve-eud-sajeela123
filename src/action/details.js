@@ -1,12 +1,13 @@
 const BASE_URL = "http://localhost:4000/api/v1";
  
-export async function getActivityById(id) {
+export async function getActivityById(id) {    //Fetch details of a single activity. 
     const response = await fetch(`${BASE_URL}/activities/${id}`);
     if(!response.ok) throw new Error("failed to fetch");
     return response.json();
 }
  
-export async function joinActivity(userId, activityId){
+export async function joinActivity(userId, activityId){  // Add a user to an activity (POST). 
+
     const response = await fetch(`${BASE_URL}/users/${userId}/activities/${activityId}`, {
         method:"POST",
         headers:{
@@ -26,7 +27,7 @@ export async function joinActivity(userId, activityId){
  
 const token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjo3LCJ1c2VybmFtZSI6InVzZXIzIiwicGFzc3dvcmQiOiIkMmEkMTUkT01EVS44ZXRSaGY1N2ZEbVJudS9JdWhpbk5NUUpsSjh1amRVSm94RzRKWXZwdFVMNFdDZW0iLCJmaXJzdG5hbWUiOiJNYXJ0aW4iLCJsYXN0bmFtZSI6IlBvdWxzZW4iLCJhZ2UiOjIxLCJyb2xlIjoiZGVmYXVsdCIsImNyZWF0ZWRBdCI6IjIwMjEtMDktMjNUMDg6MTQ6MzAuNDA2WiIsInVwZGF0ZWRBdCI6IjIwMjEtMDktMjNUMDg6MTQ6MzAuNDA2WiJ9LCJpYXQiOjE2MzIzOTM0MTUsImV4cCI6MTYzMjM5NzAxNX0.WNiaflNk5_6tTOvIaNrOO9XkdG70ptBNt6sJIUBhlJg";
  
-export async function leaveActivity(userId, activityId) {
+export async function leaveActivity(userId, activityId) {  //Remove a user from an activity (DELETE).
     const response = await fetch(`${BASE_URL}/users/${userId}/activities/${activityId}`, {
         method: "DELETE",
         headers: {
@@ -40,3 +41,6 @@ export async function leaveActivity(userId, activityId) {
      }
    return response.json();
 }
+
+
+//Both joinActivity and leaveActivity need an Authorization token to prove the user is allowed to do it.
