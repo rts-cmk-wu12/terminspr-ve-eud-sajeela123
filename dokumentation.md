@@ -1,7 +1,7 @@
 # Dokumentation for Landrup-Dans
 Sajeela Babar, WU12
 
-<img src="./puublic">
+<img src= "./Skærmbillede 2025-09-18 095348.png">
 
 # sådan kommer du i gang
 
@@ -12,7 +12,7 @@ Sajeela Babar, WU12
 
 
 
-jeg har lavet valgfri opgave C
+
 
 ## Tech-stack
  * **next.js** 
