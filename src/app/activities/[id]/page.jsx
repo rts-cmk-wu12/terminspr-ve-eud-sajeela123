@@ -63,7 +63,7 @@ export default function ActivityDetailPage() {
       setJoined(true);
       alert("Successfully joined the activity!");
     } catch (error) {
-      console.error("Failed to join activity:", error.message);
+      //console.error("Failed to join activity:", error.message);
       alert("Failed to join activity: " + error.message);
     }
   };

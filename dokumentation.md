@@ -1,18 +1,11 @@
-# Dokumentation for Landrup-Dans
+# Dokumentation for SwapHub
 Sajeela Babar, WU12
-
-<img src= "./Skærmbillede 2025-09-18 095348.png">
 
 # sådan kommer du i gang
 
 `npmm install sass react.icons`
-
-
 `npm run dev`
-
-
-
-
+` npm i -D sass   `
 
 ## Tech-stack
  * **next.js** 
@@ -34,7 +27,8 @@ et versionsstyringsværktøj, som lader mig lave branches og versioner
 af min kode, så jeg let kan gå tilbage til tidligere versioner, 
 hvis jeg for eksemple har lavet en fejl. jeg bruger Git 
 sammen med GitHub.
-
+* **Tailwind**
+Et utility-baseret mobile-first css bibliotek. 
 
 
 * **React-icons**
@@ -45,8 +39,8 @@ en udvidelse til css, som lader mig lave funktioner,
 variabler, mixins og nesting. jeg kan opdele min css i
 moduler og dermed genbruge kode flere steder.
 
-* **web-API fra Landrup-Dans-Api**
-et interface til at få adgang til landrup-dans´s data, så
+* **web-API fra SwapHub**
+et interface til at få adgang til SwapHub´s data, så
 jeg kan lave min egen app. Dette er den eneste måde
  hvor jeg lovligt kan få adgang til  landrup-dans´s  data.
 
@@ -57,50 +51,99 @@ bruger Zod til blandt andet at validere bruger-input fra formularer.
 ## Kode-eksempel
 
 common Header komponent
+common footer komponent
 
-(components/clander.card.jsx)
+(components/contact-form.jsx)
+
+
+```javascript
+"use client"
+
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+
+export const metadata = {
+    title: "contact",
+    description: " contact",
+
+};
+
+
+export default function ContactForm() {
+    const router = useRouter();
+    const [email, setEmail] = useState("");
+    const [status, setStatus] = useState(null);
 
 
 
-export default async function CalendarCard({ calendarData }) {
-  const cookieStore = await cookies();
-  const token = cookieStore.get("token")?.value;
+    const handleSubmit = async (e) => {
+        e.preventDefault();
 
-  return (
-    <>
-      {!calendarData || calendarData.length < 1 ? (
-        <div className="card-empty">
-          No Activities available
+        if (!email.trim()) {
+            setStatus("plase enter your email first");
+            return;
+        }
+        setStatus("send");
+
+        try {
+            const response = await fetch("http://localhost:4000/api/v1/newsletter", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email }),
+
+            });
+
+            if (response.ok) {
+                setStatus("Thanks for singin");
+                setEmail("")
+
+                setTimeout(() => {
+                    router.push("/");
+                }, 1500);
+            }
+            else {
+                setStatus("Something went wrong. Try again");
+
+            }
+
+        } catch (error) {
+            setStatus("Server problem.Try again")
+
+        }
+    };
+
+    return (
+        <div className="contact-form">
+            <h1>Contact</h1>
+            <p>Sign up for our newsletter for latest updates</p>
+
+            <form onSubmit={handleSubmit}>
+
+                <input type="email" placeholder="enter your email" value={email} onChange={(e) =>
+                    setEmail(e.target.value)} />
+
+                <button type="submit">Subscribe</button>
+  </form>
+
+            <p>{status}</p>
         </div>
-      ) : (
-        <div>
-          {calendarData.map((activity) => (
-            <Link
-              href={`/calendar/${activity.id}`}
-              key={activity.id}
-              className="card"
-            >
-              <div className="card-title">
-                {activity.name}
-              </div>
-              <div className="card-subtitle">
-                {activity.weekday} {activity.time}
-              </div>
-            </Link>
-          ))}
-        </div>
-      )}
-    </>
-  );
+    )
+
 }
 
+```
 
+jeg starter med at kalde en react hook useRouter. Det er en funktion fra next.js,
+ der navigere mekllem sider.
 
+jeg bruger også useState to gange: først til at gemme værdien af e-mail, brugeren skriver i inputfeltet,
+og derefter til at gemme en statusbesked, som fortæller om formularen er sendt, lykkedes, eller fejlede.
 
+efter laver er en funktion, der hedder handleSubmit. Den køree, når brugeren trykker på "Subscribe" knappen.
+Først stopper jeg browseren fra at reloade siden med e.preventDefault(). Derefter jeg tjekker om brugeren har skrevet en e-mail. hvis ikke skrevet så viser en fejlbesked. hvis skrevet, så sender en request til servern med fetch.
 
-jeg starter med at kalde en React hook "useState" som er en funktion, der 
-returnerer et array. Arrayet indehodler 2 elementer: Er state og en sætter-function
-til dette state. UseState tager imod et argument "initialState" som er vørdien for 
-statet ved start.
+hvis serveren er ok, skriver jeg en tak besked, tømmer inputfeltet og sender brugeren til forsiden efter 1,5 sekund. Hvis der er nogen  fejl, vises en fejlbeskes i stedet.
+
+Til sidst jeg returnerer lidt jsx, som viser en overskrift, en lille tekst, selve formularen med et input og en knap samt statusbeskeden.
 
 

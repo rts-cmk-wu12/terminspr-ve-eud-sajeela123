@@ -17,11 +17,11 @@ export default function LoginForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {   //code you want to run.
+    try {              //code you want to run. //promise
       const data = await login(username, password);
       localStorage.setItem("token", data.token);
       router.push("/activities");
-    } catch (err) { //code that runs if something inside try throws an error.
+    } catch (err) {       //code that runs if something inside try throws an error.
       setError("Login failed. Check your credentials.");
     }
   };

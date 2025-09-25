@@ -1,4 +1,4 @@
-// actions/auth.js
+
 export async function login(username, password) {
   const res = await fetch("http://localhost:4000/auth/token", {
     method: "POST",
